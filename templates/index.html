@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {%for i in range (20)%}
+    <li><a href={{movies[i][2]}}><img src={{movies[i][1]}} alt=></a>{{ movies[i][0] }}</li>
+    {%endfor%}
+</body>
+</html>
