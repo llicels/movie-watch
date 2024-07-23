@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+    <title>Document</title>
+</head>
+<body>
+    <div class="grid grid-cols-5 ml-8 gap-x-0.5 gap-y-4">
+    {%for i in range (20)%}
+    <li class="list-none"><a href={{movies[i][2]}}><img src={{movies[i][1]}} width="240" height="325" class="rounded-lg shadow-xl"></a>{{ movies[i][0] }}</li>
+    {%endfor%}
+</div>
+<div id="controls" class="flex justify-end mb-8"><form action="">
+    <button class="button mr-14 rounded-xl bg-rose-400 px-10 text-white py-1.5 shadow-xl" onclick="loadNext()">Next</button></form>
+    <script>
+        globalThis.pgNumber = 1
+        function loadNext() {
+    globalThis.pgNumber += 1;
+    const page = { page: pgNumber };
+
+    const request = new XMLHttpRequest();
+    request.open('POST', '/moreMovies', true);
+    request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    console.log(request);
+
+    request.onreadystatechange = function() {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            if (request.status === 200) {
+                console.log("Response:", request.responseText);
+            } else {
+                console.error("Error:", request.statusText);
+            }
+        }
+    };
+
+    request.send(JSON.stringify(page));
+}
+
+    </script>
+</div>
+
+
+</body>
+</html>

@@ -3,11 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Discover</title>
 </head>
 <body>
-    {%for i in range (20)%}
-    <li><a href={{movies[i][2]}}><img src={{movies[i][1]}} alt=></a>{{ movies[i][0] }}</li>
-    {%endfor%}
+    <nav class="navbar bg-rose-200 py-4 mb-4 flex gap-x-96">
+        <div>
+        <h2 class="ml-8 w-96">tv land</h2>
+    </div>
+    <div class="flex gap-x-24">
+        <div><form action="/" ><button>popular movies</button></form></div>
+        <div><form action="/series" ><button>popular shows</button></form></div>
+        <div><form action="/search" ><button>search</button></form></div>
+    </div>
+    </nav>
+
+    </nav>
+    <div class="grid grid-cols-5 ml-8 gap-x-0.5 gap-y-4">
+        {% for movie in movies %}
+        <li class="list-none">
+            <a href="{{ movie[2] }}">
+                <img src="{{ movie[1] }}" width="240" height="325" class="rounded-lg shadow-xl">
+            </a>
+            {{ movie[0] }}
+        </li>
+        {% endfor %}
+    </div>
+    <div id="controls" class="flex justify-end mb-8">
+        <div>
+            <form method="POST">
+                {% if page_number > 1 %}
+                <input type="hidden" name="page" value="{{ page_number - 1 }}">
+                <button type="submit" class="button mr-14 rounded-xl bg-rose-400 px-10 text-white py-1.5 shadow-xl">Back</button> 
+                {% endif %}
+            </form></div>
+        <div>
+            <form method="POST">
+                <input type="hidden" name="page" value="{{ page_number + 1 }}">
+                <button type="submit" class="button mr-14 rounded-xl bg-rose-400 px-10 text-white py-1.5 shadow-xl">More</button>
+            </form>
+        </div>
+    
+</div>
 </body>
 </html>
